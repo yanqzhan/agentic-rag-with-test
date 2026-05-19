@@ -1,9 +1,9 @@
-import os
 from rag import agent
+from tests.ai_model import ds_model
 from deepeval.test_case import LLMTestCase
-from deepeval.metrics import AnswerRelevancyMetric, ContextualPrecisionMetric
+from deepeval.metrics import AnswerRelevancyMetric, ContextualPrecisionMetric, ContextualRecallMetric, FaithfulnessMetric, ContextualRelevancyMetric
 from deepeval import evaluate
-from deepeval.models import DeepSeekModel
+
 
 query = "华为公司相关的车载系统叫什么?"
 config = {
@@ -21,7 +21,7 @@ for event in agent.stream(
             doc_texts = [doc.page_content for doc in last_msg.artifact]
             retrieved_docs.extend(doc_texts)
 result = event["messages"][-1].content
-print(f"retrieved_content:\n{doc_texts}")
+print(f"retrieved_content:\n{retrieved_docs}")
 print(f"answer:\n{result}")
 print("\n\n")
 
@@ -32,12 +32,22 @@ test_case = LLMTestCase(
         expected_output="华为鸿蒙座舱"
 )
 
-ds_model = DeepSeekModel(
-    model="deepseek-chat",
-    api_key=os.getenv("DEEPSEEK_API_KEY"),
-    temperature=0
-)
-
 answer_relevancy = AnswerRelevancyMetric(threshold=0.8, model=ds_model)
 contextual_precision = ContextualPrecisionMetric(threshold=0.8, model=ds_model) # need expected_output
-evaluate([test_case], metrics=[answer_relevancy, contextual_precision])
+faithfulness = metric = FaithfulnessMetric(
+        threshold=0.7,
+        model=ds_model,
+        include_reason=True
+    )
+contextual_relevancy = metric = ContextualRelevancyMetric(
+    threshold=0.7,
+    model=ds_model,
+    include_reason=True
+)
+
+contextual_recall = ContextualRecallMetric(
+    threshold=0.7,
+    model=ds_model,
+    include_reason=True
+)
+evaluate([test_case], metrics=[answer_relevancy, contextual_precision, faithfulness, contextual_relevancy, contextual_recall])

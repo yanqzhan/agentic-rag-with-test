@@ -7,13 +7,16 @@ A agentic RAG (Retrieval-Augmented Generation) chatbot with conversation memory,
 - **LLM**: BigModel/ZHIPU(`glm-5.1`) via LangChain for RAG, DeepSeek('deepseek-chat') for DeepEval test.
 - **Embeddings**: Ollama (`nomic-embed-text`) running locally
 - **Vector Store**: Qdrant (`localhost:6333`, collection `automotives`)
+- **Evaluation Framework**: DeepEval
 
 ## Files
 
 | File | Description |
 |------|-------------|
-| `chatbot.py` | Gradio web UI that serves the chatbot |
-| `ingest.py` | Incrementally embeds `.md` docs from `DOCS_PATH` into Qdrant |
+| `preprocess.py` | Incrementally embeds `.md` doc into Qdrant |
+| `rag.py` | Langchain agent with a tool to retrieve contexts from Qdrant |
+| `chat.py` | Chatbot to accep user input and call agent to generate response |
+| `tests` | Dir with several test program files to evaluate this agentic RAG |
 
 ## Prerequisites
 
@@ -69,3 +72,26 @@ python preprocess.py
 ```bash
 python chat.py
 ```
+
+8. Run the tests, for example:
+```bash
+python -m tests.deepeval_normal
+```
+You'll get like:
+```bash
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ 🚀 DeepEval Evaluation Results                                                                                                                                        │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ ✅ test_case_0 (Passed 2 metrics)                                                                                                                                     │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Aggregate Metrics                                                                                                                                                     │
+│                                                                                                                                                                       │
+│  Metric                                                          ┃ Average Score                               ┃ Pass Rate                      ┃ Total               │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━ │
+│  Answer Relevancy                                                │ 1.00                                        │ 100.00%                        │ 1                   │
+│  Contextual Precision                                            │ 1.00                                        │ 100.00%                        │ 1                   │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```
+
