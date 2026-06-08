@@ -3,4 +3,7 @@ langchain-text-splitters
 langchain-ollama
 langchain-qdrant
 langchain_openai
+langchain-classic
+langchain_community
+flashrank
 deepeval

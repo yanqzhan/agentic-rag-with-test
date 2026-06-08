@@ -36,6 +36,8 @@ def splitter():
     )
 
     final_chunks = []
+    # OR： final_chunks = recursive_splitter.split_document(md_header_splits)
+    # which can not add source_chunk/sub_shunk in metadata
     for i, doc in enumerate(md_header_splits):
         content = doc.page_content
         metadata = doc.metadata
@@ -75,5 +77,6 @@ def save_to_vectorstore(file_chunks):
     vector_store.add_documents(documents=file_chunks)
     return vector_store
 
-file_chunks = splitter()
-vector_store = save_to_vectorstore(file_chunks)
+if __name__ == "__main__":
+    file_chunks = splitter()
+    vector_store = save_to_vectorstore(file_chunks)

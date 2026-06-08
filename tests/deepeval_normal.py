@@ -10,6 +10,20 @@ config = {
         "configurable": {"thread_id": "user1"}
     }
 
+def extract_from_tool_output(tool_output):
+    plain_texts = []
+    blocks = tool_output.split("\n\n")
+    for block in blocks:
+        if not block.strip():
+            continue
+        content_marker = "Content: "
+        if content_marker in block:
+            content_start = block.find(content_marker) + len(content_marker)
+            plain_text = block[content_start:]
+            plain_texts.append(plain_text.strip())
+
+    return plain_texts
+
 retrieved_docs = []
 for event in agent.stream(
         {"messages": [{"role": "user", "content": query}]},
@@ -18,7 +32,7 @@ for event in agent.stream(
         ):
         last_msg = event["messages"][-1]
         if last_msg.type == "tool":
-            doc_texts = [doc.page_content for doc in last_msg.artifact]
+            doc_texts = extract_from_tool_output(last_msg.content)
             retrieved_docs.extend(doc_texts)
 result = event["messages"][-1].content
 print(f"retrieved_content:\n{retrieved_docs}")
