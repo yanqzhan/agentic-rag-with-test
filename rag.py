@@ -1,5 +1,7 @@
 import os
 import logging
+import warnings
+
 from langchain_qdrant import QdrantVectorStore
 from langchain_ollama import OllamaEmbeddings
 from langchain.tools import tool
@@ -7,22 +9,23 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_classic.retrievers import EnsembleRetriever, ContextualCompressionRetriever
+with warnings.catch_warnings():
+    warnings.filterwarnings(
+        "ignore",
+        message="`langchain-community` is being sunset*",
+        category=DeprecationWarning
+    )
+    from langchain_community.retrievers import BM25Retriever
+    from langchain_community.document_compressors import FlashrankRerank
 
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="langchain_community")
-from langchain_community.retrievers import BM25Retriever
-from langchain_community.document_compressors import FlashrankRerank
-
-from config import collect_name, Qdrant_URL
+from config import collect_name, Qdrant_URL, embed_model
 from preprocess import splitter
 
 file_chunks = splitter()
-print(f"length of file_chunks:{len(file_chunks)}")
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="langchain_community")
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 
-embeddings = OllamaEmbeddings(model='nomic-embed-text')
+embeddings = OllamaEmbeddings(model=embed_model)
 vector_store = QdrantVectorStore.from_existing_collection(
     collection_name=collect_name,
     embedding=embeddings,

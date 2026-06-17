@@ -4,13 +4,13 @@ from deepeval.dataset import EvaluationDataset, Golden
 from deepeval.test_case import LLMTestCase
 from langchain_qdrant import QdrantVectorStore
 from langchain_ollama import OllamaEmbeddings
-from config import collect_name, Qdrant_URL
+from config import collect_name, Qdrant_URL, embed_model
 from tests.ai_model import ds_model
 
 
 contextual_relevancy = ContextualRelevancyMetric(threshold=0.6, model=ds_model)
 
-embeddings = OllamaEmbeddings(model='nomic-embed-text')
+embeddings = OllamaEmbeddings(model=embed_model)
 vector_store = QdrantVectorStore.from_existing_collection(
     collection_name=collect_name,
     embedding=embeddings,

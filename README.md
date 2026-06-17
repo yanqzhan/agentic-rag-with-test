@@ -5,7 +5,7 @@ A agentic RAG (Retrieval-Augmented Generation) chatbot with conversation memory,
 ## Architecture
 
 - **LLM**: BigModel/ZHIPU(`glm-5.1`) via LangChain for RAG, DeepSeek('deepseek-chat') for DeepEval test.
-- **Embeddings**: Ollama (`nomic-embed-text`) running locally
+- **Embeddings**: Ollama (`bge-m3`) running locally
 - **Vector Store**: Qdrant (`localhost:6333`, collection `automotives`)
 - **Evaluation Framework**: DeepEval
 
@@ -50,7 +50,7 @@ pip install https://github.com/explosion/spacy-models/releases/download/en_core_
 4. Pull the embedding model:
 
 ```bash
-ollama pull nomic-embed-text
+ollama pull bge-m3
 ```
 
 5. Clain your API keys by export or a `.env` file:

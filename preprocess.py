@@ -7,7 +7,7 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client.models import Distance, VectorParams
 from qdrant_client import QdrantClient
-from config import MARKDOWN_FILE, CHUNK_SIZE, CHUNK_OVERLAP, Qdrant_URL, collect_name
+from config import MARKDOWN_FILE, CHUNK_SIZE, CHUNK_OVERLAP, Qdrant_URL, collect_name, embed_model
 
 
 def splitter():
@@ -58,7 +58,7 @@ def splitter():
     return final_chunks
 
 def save_to_vectorstore(file_chunks):
-    embeddings = OllamaEmbeddings(model='nomic-embed-text')
+    embeddings = OllamaEmbeddings(model=embed_model)
     
     client = QdrantClient(url=Qdrant_URL)
     vector_size = len(embeddings.embed_query("sample text"))
