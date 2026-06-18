@@ -9,6 +9,7 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_classic.retrievers import EnsembleRetriever, ContextualCompressionRetriever
+from langchain_classic.retrievers.document_compressors import FlashrankRerank
 with warnings.catch_warnings():
     warnings.filterwarnings(
         "ignore",
@@ -16,7 +17,6 @@ with warnings.catch_warnings():
         category=DeprecationWarning
     )
     from langchain_community.retrievers import BM25Retriever
-    from langchain_community.document_compressors import FlashrankRerank
 
 from config import collect_name, Qdrant_URL, embed_model
 from preprocess import splitter
