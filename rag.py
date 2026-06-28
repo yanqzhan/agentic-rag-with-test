@@ -36,12 +36,11 @@ vector_store = QdrantVectorStore.from_existing_collection(
 @tool
 def retrieve_context(query: str):
     """Retrieve information to help answer a query."""
-    #artifact = vector_store.similarity_search(query, k=2)
+    # artifact = vector_store.similarity_search(query, k=2)
     semantic_retriever = vector_store.as_retriever(
             search_type="similarity",
             search_kwargs={"k": 15}  # Recall more for rerank
         )
-
 
     bm25_retriever = BM25Retriever.from_documents(file_chunks)
     bm25_retriever.k = 15
@@ -54,13 +53,13 @@ def retrieve_context(query: str):
     compressor = FlashrankRerank(
             model="ms-marco-MultiBERT-L-12",
             top_n=5)
- 
+
     final_retriever = ContextualCompressionRetriever(
         base_compressor=compressor,
         base_retriever=ensemble_retriever
     )
 
-    #artifact = final_retriever.get_relevant_documents(query)
+    # artifact = final_retriever.get_relevant_documents(query)
     documents = final_retriever.invoke(query)
 
     content = "\n\n".join(
@@ -86,7 +85,10 @@ llm = ChatOpenAI(
         temperature=0.7
         )
 
-agent = create_agent(model=llm, tools=[retrieve_context], system_prompt=prompt, checkpointer=InMemorySaver())
+agent = create_agent(model=llm,
+                     tools=[retrieve_context],
+                     system_prompt=prompt,
+                     checkpointer=InMemorySaver())
 
 query = (
     "华为公司相关的车载系统叫什么?\n\n"
@@ -94,8 +96,8 @@ query = (
 
 if __name__ == "__main__":
     result = agent.invoke(
-            {"messages":[{"role":"user", "content":query}]},
-            {"configurable":{"thread_id":"1"}})
+            {"messages": [{"role": "user", "content": query}]},
+            {"configurable": {"thread_id": "1"}})
     print(result["messages"][-1].content)
     points_count = vector_store.client.count(collection_name=collect_name)
     print(f"vectors point count in Qdrant: {points_count}")

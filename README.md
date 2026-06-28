@@ -1,6 +1,6 @@
 # Agentic RAG with tests
 
-A agentic RAG (Retrieval-Augmented Generation) chatbot with conversation memory, and tests by DeepEval.
+An agentic RAG (Retrieval-Augmented Generation) chatbot with conversation memory, and tests by DeepEval.
 
 > **📌 Notice**: This project is for personal portfolio demonstration only. Please review the full [Disclaimer](#-disclaimer) before use.
 
@@ -56,7 +56,7 @@ Any use of the Project in violation of the above restrictions is at the user's o
 |------|-------------|
 | `preprocess.py` | Incrementally embeds `.md` doc into Qdrant |
 | `rag.py` | Langchain agent with a tool to retrieve contexts from Qdrant |
-| `chat.py` | Chatbot to accep user input and call agent to generate response |
+| `chat.py` | Chatbot to accept user input and call agent to generate response |
 | `tests` | Dir with several test program files to evaluate this agentic RAG |
 
 ## Prerequisites
@@ -94,11 +94,11 @@ pip install https://github.com/explosion/spacy-models/releases/download/en_core_
 ollama pull bge-m3
 ```
 
-5. Clain your API keys by export or a `.env` file:
+5. Configure your API keys by export or a `.env` file:
 
 ```
 export DEEPSEEK_API_KEY=your-deepseek-api-key
-OR in .env:
+# OR in .env:
 DEEPSEEK_API_KEY=your-deepseek-api-key
 ```
 
