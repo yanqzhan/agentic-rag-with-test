@@ -1,0 +1,162 @@
+{
+  "test_cases": [
+    {
+      "id": "standard_001",
+      "category": "standard",
+      "question": "BlackBerry QNX 采用什么内核架构？已通过什么功能安全认证？",
+      "expected_answer": "QNX 采用微内核架构（Microkernel Architecture），已通过 ISO 26262 ASIL-D 最高功能安全认证。",
+      "source_contexts": ["2.1 BlackBerry QNX - 技术架构"],
+      "difficulty": "easy"
+    },
+    {
+      "id": "standard_002",
+      "category": "standard",
+      "question": "RHIVOS 支持哪些指令集架构？计划什么时间正式量产发布？",
+      "expected_answer": "RHIVOS 支持 ARM AArch64 和 x86-64 双架构，计划于 2025 年第三季度（Q3）正式量产发布。",
+      "source_contexts": ["2.4 RHIVOS - 支持架构", "2.4 RHIVOS - 核心特点"],
+      "difficulty": "easy"
+    },
+    {
+      "id": "standard_003",
+      "category": "standard",
+      "question": "华为鸿蒙座舱（HarmonySpace）采用什么技术架构？座舱芯片麒麟990A的NPU算力是多少？",
+      "expected_answer": "鸿蒙座舱采用全栈自研微内核架构（Microkernel Architecture），分布式设计。麒麟990A 的 NPU 算力为 3.5 TOPS。",
+      "source_contexts": ["3.1 华为鸿蒙座舱 - 技术架构"],
+      "difficulty": "easy"
+    },
+    {
+      "id": "standard_004",
+      "category": "standard",
+      "question": "比亚迪 DiLink 系统的技术基础是什么？覆盖了比亚迪旗下哪些品牌？",
+      "expected_answer": "DiLink 基于 Android 深度定制开发，覆盖比亚迪旗下仰望、腾势、方程豹、王朝、海洋五大品牌。",
+      "source_contexts": ["3.3 比亚迪 DiLink - 技术架构", "3.3 比亚迪 DiLink - 车企合作情况"],
+      "difficulty": "easy"
+    },
+    {
+      "id": "standard_005",
+      "category": "standard",
+      "question": "Android Automotive OS 和 Android Auto 的主要区别是什么？",
+      "expected_answer": "Android Automotive OS 是基于 AOSP 打造的完整车载操作系统，通过 HAL 实现与底层硬件解耦，独立于 Android Auto（手机映射）。Android Auto 仅是手机投屏方案，而 Android Automotive OS 是独立运行在车机上的完整系统。",
+      "source_contexts": ["2.2 Android Automotive OS - 技术架构"],
+      "difficulty": "medium"
+    },
+    {
+      "id": "standard_006",
+      "category": "standard",
+      "question": "AGL 的五层软件架构具体是什么？",
+      "expected_answer": "AGL 采用五层软件架构：App/HMI 层、应用框架层、服务层、Linux 内核层、硬件适配层（BSP）。支持混合关键性部署，通过容器技术实现业务隔离。",
+      "source_contexts": ["2.3 AGL - 技术架构"],
+      "difficulty": "medium"
+    },
+    {
+      "id": "standard_007",
+      "category": "standard",
+      "question": "斑马智行 AliOS 在国内合作了多少个汽车品牌和车型？累计覆盖多少辆智能汽车？",
+      "expected_answer": "AliOS 已合作 10+ 个汽车品牌、40+ 款车型，累计覆盖超 100 万辆智能汽车。",
+      "source_contexts": ["3.2 斑马智行 AliOS - 车企合作情况"],
+      "difficulty": "easy"
+    },
+    {
+      "id": "standard_008",
+      "category": "standard",
+      "question": "蔚来 Banyan 平台搭载的智驾和座舱总算力是多少？自研的 NWM 世界模型有什么特点？",
+      "expected_answer": "Banyan 平台智驾 + 座舱总算力达 1016 TOPS。NWM（NIO World Model）是中国首个基于多元自回归架构的生成式具身驾驶模型，可在 100 毫秒内同步推演 216 种潜在行车场景。",
+      "source_contexts": ["3.4 蔚来 Banyan - 技术架构", "3.4 蔚来 Banyan - 核心特点"],
+      "difficulty": "medium"
+    },
+    {
+      "id": "boundary_001",
+      "category": "boundary",
+      "question": "比较 QNX、RHIVOS 和 AGL 在功能安全认证方面的差异。",
+      "expected_answer": "QNX 通过 ISO 26262 ASIL-D 最高安全认证，是安全域标杆。RHIVOS 通过 ISO 26262 ASIL-B 认证（Safety Element out of Context）并包含混合关键性认证，是首家通过 Linux 车规级功能安全认证的商业发行版。AGL 通过容器技术和社区协作提供灵活的安全部署方案，但本身未直接通过 ASIL 功能安全认证。",
+      "source_contexts": ["2.1 QNX - 技术架构", "2.3 AGL - 技术架构", "2.4 RHIVOS - 技术架构"],
+      "difficulty": "hard",
+      "type": "multi_hop"
+    },
+    {
+      "id": "boundary_002",
+      "category": "boundary",
+      "question": "汇总所有支持 x86/x86-64 架构的车载操作系统，并说明各自的应用场景。",
+      "expected_answer": "支持 x86/x86-64 的系统包括：QNX（支持 x86-64，用于仪表/安全域/ADAS）、AGL（支持 x86-64，用于 IVI 系统）、RHIVOS（支持 x86-64，用于多域部署）、Tesla OS（采用 AMD APU x86-64，全栈自研封闭系统）。其中 Tesla OS 是唯一完全基于 x86 架构的系统，采用 AMD APU 垂直整合路线。",
+      "source_contexts": ["第一章总表", "2.1 QNX", "2.3 AGL", "2.4 RHIVOS", "2.5 Tesla OS"],
+      "difficulty": "hard",
+      "type": "multi_hop"
+    },
+    {
+      "id": "boundary_003",
+      "category": "boundary",
+      "question": "国内和国际车载 OS 在 AI 大模型应用方面的主要差异是什么？",
+      "expected_answer": "国内 AI 大模型应用以\"全面落地\"为特征：比亚迪联合火山引擎将豆包大模型融入全系车型，蔚来自研 NWM 世界模型全量推送，华为深度融合盘古大模型，斑马智行 2021 年率先引入 AI 大模型技术。国际车企则以\"试点引入\"为主：沃尔沃在 Android 15 中导入 Google Gemini，奔驰整合微软与谷歌 AI，但规模化落地速度慢于国内。",
+      "source_contexts": ["5.4 AI 大模型深度上车", "2.2 沃尔沃合作", "2.6 奔驰合作"],
+      "difficulty": "hard",
+      "type": "multi_hop"
+    },
+    {
+      "id": "boundary_004",
+      "category": "boundary",
+      "question": "报告指出车载操作系统存在两种生态构建模式，请分别阐述并举例。",
+      "expected_answer": "两种模式：1）\"联盟制/生态制\"，如华为五界联盟（问界、智界、享界、尊界、尚界）统一鸿蒙生态，斑马 AliOS 的分层解耦模式；2）\"独立自研制\"，如 Tesla 全栈自研、蔚来 Banyan/Cedar 基于 Linux 自研、奔驰 MB.OS 全栈自研。",
+      "source_contexts": ["5.5 国内 vs 国际", "3.1 华为合作", "3.2 AliOS", "2.5 Tesla", "3.4 蔚来"],
+      "difficulty": "hard",
+      "type": "summary"
+    },
+    {
+      "id": "boundary_005",
+      "category": "boundary",
+      "question": "哪些操作系统同时支持 ARM 和 x86 架构？这种双架构支持有何战略意义？",
+      "expected_answer": "同时支持 ARM 和 x86 架构的系统包括：QNX（ARMv7/v8/AArch64、x86-64、PowerPC）、AGL（x86-64、ARM arm32/arm64）、RHIVOS（ARM AArch64 + x86-64）。战略意义在于：RHIVOS 以双架构支撑\"一次开发，多硬件部署\"，降低车企对单一芯片供应商的依赖；AGL 通过 QEMU 实现跨架构开发；QNX 凭借多架构支持巩固其安全域统治地位。x86 在高端 IVI 和自动驾驶训练场景保持竞争力，ARM 则主导量产车低功耗计算。",
+      "source_contexts": ["第一章总表", "2.1 QNX", "2.3 AGL", "2.4 RHIVOS", "5.1 架构趋势"],
+      "difficulty": "hard",
+      "type": "multi_hop"
+    },
+    {
+      "id": "boundary_006",
+      "category": "boundary",
+      "question": "总结报告中出现的所有\"中国首个\"或\"全球首个\"的技术突破。",
+      "expected_answer": "1）华为麒麟990A：集成了达芬奇架构 NPU（3.5 TOPS）；2）蔚来 NWM：中国首个基于多元自回归架构的生成式具身驾驶模型；3）斑马智行 AliOS：国内唯一实现多芯适配的车用 OS；4）RHIVOS：全球首家实现 Linux 车规级功能安全认证的商业发行版厂商；5）东风日产天籁·鸿蒙座舱：全球首款搭载鸿蒙座舱的燃油车。",
+      "source_contexts": ["3.1 华为", "3.4 蔚来", "3.2 AliOS", "2.4 RHIVOS", "3.1 东风日产"],
+      "difficulty": "hard",
+      "type": "multi_hop"
+    },
+    {
+      "id": "negative_001",
+      "category": "negative",
+      "question": "今天北京的天气怎么样？",
+      "expected_answer": null,
+      "expected_behavior": "拒答或告知无法从知识库中找到相关信息",
+      "source_contexts": []
+    },
+    {
+      "id": "negative_002",
+      "category": "negative",
+      "question": "帮我写一段关于人工智能发展历史的论文摘要。",
+      "expected_answer": null,
+      "expected_behavior": "拒答或告知知识库不包含该信息",
+      "source_contexts": []
+    },
+    {
+      "id": "negative_003",
+      "category": "negative",
+      "question": "推荐一部好看的科幻电影。",
+      "expected_answer": null,
+      "expected_behavior": "拒答或告知无法推荐",
+      "source_contexts": []
+    },
+    {
+      "id": "negative_004",
+      "category": "negative",
+      "question": "如何做红烧肉？",
+      "expected_answer": null,
+      "expected_behavior": "拒答或告知知识库是车载OS报告，不包含烹饪信息",
+      "source_contexts": []
+    },
+    {
+      "id": "negative_005",
+      "category": "negative",
+      "question": "Python 编程语言的主要特点是什么？",
+      "expected_answer": null,
+      "expected_behavior": "拒答或告知知识库不包含编程语言相关信息",
+      "source_contexts": []
+    }
+  ]
+}
