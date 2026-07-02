@@ -1,6 +1,6 @@
 # Agentic RAG with tests
 
-An agentic RAG (Retrieval-Augmented Generation) chatbot with conversation memory, and tests by DeepEval.
+An agentic RAG (Retrieval-Augmented Generation) system with tests(DeepEval, Security, etc).
 
 > **📌 Notice**: This project is for personal portfolio demonstration only. Please review the full [Disclaimer](#-disclaimer) before use.
 
@@ -114,11 +114,13 @@ python preprocess.py
 python chat.py
 ```
 
-8. Run the tests, for example:
+8. Run the tests:
+- All tests scripts are under "tests/" directory, especially the deepeval_with_dataset.py(standard, boundary, negative tests) and test_security.py(direct/indirect/jailbreak tests) would be valuable.
+- A basic example:
 ```bash
 python -m tests.deepeval_normal
 ```
-You'll get like:
+You'll get output like:
 ```bash
 ╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │ 🚀 DeepEval Evaluation Results                                                                                                                                        │
